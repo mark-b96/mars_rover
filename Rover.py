@@ -24,15 +24,15 @@ class Rover(object):
         for i, j in zip(self.moves_data, self.init_coords_data):
             self.init_coords['x'], self.init_coords['y'], self.init_coords['orientation'] = int(j[0]), int(j[1]), j[2]
             if (self.init_coords['x'] > self.x_bounds) or (self.init_coords['y'] > self.y_bounds):
-                print("Initial rover coordinates out of plateau bounds")
+                self.output.extend("Initial rover coordinates out of plateau bounds")
             else:
                 self.degrees_to_coords()
                 self.moves = ','.join([str(x) for x in i])
                 self.degrees_to_coords()
                 self.move_rover()
-                self.output.extend([self.init_coords['x'], self.init_coords['y'], self.init_coords['orientation'], '\n'])
-
-        self.output = ' '.join([str(x) for x in self.output[:-1]])
+                self.output.extend([self.init_coords['x'], ' ', self.init_coords['y'], ' ',
+                                    self.init_coords['orientation'], '\n'])
+        self.output = ''.join([str(x) for x in self.output])
         print(self.output)
         return self.output
 
@@ -55,7 +55,6 @@ class Rover(object):
                         and self.init_coords['x'] < self.x_bounds:
                     self.init_coords['x'] += 1
         self.coords_to_degrees()
-
 
     def degrees_to_coords(self):
         if self.init_coords['orientation'] == 'N':
