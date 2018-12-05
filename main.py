@@ -1,6 +1,6 @@
-from DataHandler import Input
+from Rover import Rover
 
 if __name__ == '__main__':
-    i = Input()
+    i = Rover()
     i.read_file("input.txt")
     i.initialise_rover()
